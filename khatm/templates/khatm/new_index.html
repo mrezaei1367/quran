@@ -1,0 +1,63 @@
+{% extends 'khatm/master.html' %}
+
+{% block title %}
+    Articles Page 2
+{% endblock %}
+
+{% block content %}
+{#    <h2>{{ title }} : </h2>#}
+
+
+
+
+    <!-- Editable table -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">ختم قرآن مرحوم قوام حسنی </h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i
+            class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+          <thead>
+          <tr>
+              <th class="text-center">انتخاب</th>
+              <th class="text-center">شماره حزب</th>
+              <th class="text-center">شماره جزء</th>
+
+          </tr>
+          </thead>
+
+          <tbody>
+
+        {% for joz in khatm %}
+            <tr>
+              <td>
+{#                      <form action="{% url 'articles:article.edit' form.instance.pk %}" method="POST">#}
+                <form action="{% url 'khatm:khatm.add' joz.id %}" method="POST">
+                    {% csrf_token %}
+                <span class="table-remove"><button type="submit"
+                  class="btn btn-success btn-rounded btn-sm my-0" >افزودن</button></span>
+              </form>
+
+              </td>
+                <td class="pt-3-half" contenteditable="true">{{ joz.hezb }}</td>
+                <td class="pt-3-half" contenteditable="true">{{ joz.joz }}</td>
+          </tr>
+
+        {% empty %}
+            <div style="display: flex;justify-content: flex-end;">حزبی برای انتخاب باقی نمانده است</div>
+        {% endfor %}
+
+
+
+
+          </tbody>
+
+
+
+      </table>
+         </div>
+  </div>
+</div>
+
+{% endblock %}
